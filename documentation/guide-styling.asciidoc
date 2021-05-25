@@ -38,6 +38,55 @@ You might have noticed that *instead of "class" in that snippet there is "classn
 Create a Use classes is the recommended process to develop your styles and appply them.
 
 === PostCSS, CSS modules, BEM
-=== Sass
+
+One of the greatest pain points of CSS is the fact that your classes are global no matter in which scope you wrote them. To solve that, we have a set of tooling that working together allows you to enhance CSS with Javascript, write generic and readable classnames only for the scope you decide and naming conventions to write clean and understandable CSS at first glance.
+
+https://github.com/postcss/postcss[PostCSS] provide functionalities to add plugins and tools to apply to your CSS
+https://github.com/css-modules/css-modules[CSSModules] are "CSS files in which all class names and animation names are scoped locally by default."
+http://getbem.com/[BEM] introduce you a system of naming for your classes based on their responsability to have coherent class names for all your CSS
+
+
+=== Preprocessors
+
+While a project can perfectly work with plain CSS, including a CSS preprocessor can boost your speed of development, bring complete new set of features and improve the maintanability.
+
+To use it you just need to pick one and install the CSS compiler on your environment
+
+Currently the most famous are: Sass, Less and Stylus. Based on our experience, and on community usage + support we strongly recommend to go for https://sass-lang.com/[Sass]
+
+Using handful resources like this https://devhints.io/sass[cheatsheet] learn to use it is fast and easy.
+
+From all the features, the usage of the variables brings to the table an extremely interesting concept that you must use as much as you can: *Style guide*
+
+On Sass guidelines can be found the definition of an architecture to implement in your projects to make good use of reusable styling implemented once and used everywhere:
+
+https://sass-guidelin.es/#the-7-1-pattern[The 7-1 pattern]
+
+The main reason to use it is to come to an agreement of how the application will look and build all the CSS beforehand, then is just a matter of use it to fit all your components. Your designer/client decide to change the primary color of the app. No problem, go to your /variables folder and change it. No more hours of seeking for that color on every file of your app.
+
+
 === CSS Frameworks
-=== JS in CSS
+
+On the other hand, we have CSS frameworks providing already built tools like CSSmodules o PostCSS, a full suite of classes for spacing, color, size... And sometines also a visual identity along with components implementing such styling.
+
+One CSS framework that has been for a really long time out there is Twitter's https://getbootstrap.com/[Bootstrap]. Including responsive sizing based on columns, library of icons and much more.
+
+Another option to consider is the emerging https://tailwindcss.com/[Tailwind] with one remarkable highlight: *use of utility-first*. Instead of semantic styling when you write classes for one particular component or section of the application, you write a class that fulfills a specifc need and you apply them all on your component. That allows you to have a style guide and a class catalog that can be changed and maintained from a single point with all the application reacting from there. As a drawback, the HTML elements may become huge of classes, but there are solutions to avoid that.
+
+=== CSS in JS
+
+Disrupting the CSS state there is CSS in JS to use styling and convert it into JavaScript objects. Since it is javascript in the end, it supports all the logic JavaScript has to use CSS, from all the competitors, the most used are those who do not break how to write your CSS and only enhance it.
+
+CSS modules, from previous chapters is actually CSS in JS, surprise surprise!
+
+Now let's talk about the lirabry that grown the most and the community is accepting the best: https://styled-components.com/[Styled Components]
+
+Using an existing html tag as base, you create a completely new tag with the styling already in place using common CSS. Along with your style guide implementation, you can build all your styling, convert it into small useful and exportable tags for all your components.
+
+[source, javascript]
+styled button
+----
+export const PrimaryButton = styled.button`
+  ${tw`px-2px	py-1 w-full  text-darkblue text-left font-bold`}
+`
+----

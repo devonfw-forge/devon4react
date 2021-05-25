@@ -1,26 +1,3 @@
-= Heading level 1
-
-
-*hola*
-
-_asd_
-
-. a
-. a
-.. b
-... c
-. a
-
-[horizontal]
-cpu:: jeje
-
-== hola
-sda
-=== hola2
-asd
-
-NOTE: watch out
-
 
 * FW
 ** Create-react-app
