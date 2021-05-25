@@ -1,0 +1,295 @@
+:toc: macro
+
+= React
+
+Created by Facebook with over 168.000 stars on https://github.com/facebook/react/[Github], widely used and massive community support, React has become one of the greatest frameworks to develop client side applications.
+
+It is light, easy to start along developing and complex enough to customize your experience to suit all your needs.
+
+== Components
+
+There is an introduction to React in their https://reactjs.org/[homepage]
+
+Components are the core of any React application, they are what you work on to build your application.
+
+They are basically a union between some logic, rules and something to render in the browser:
+
+[source, javascript]
+Simple function component to greet the world
+----
+function Welcome() {
+  return <h1>Hello world</h1>;
+}
+----
+
+=== Class vs function
+
+In the past, the most common way to declare a component was to declare it as a https://reactjs.org/docs/react-component.html[Class]:
+
+[source, Javascript]
+Simple class component to greet the world
+----
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, world</h1>;
+  }
+}
+----
+
+The main reason is because the class offered a constructor method in which you can initialize your state along with ways to change the state and lifecycle methods, meanwhile, the function component was not providing any of this features, so they were more used to implement basic components.
+
+But, from the version 16.8.0 they included what has been called as https://reactjs.org/docs/hooks-intro.html[hooks]. Allowing the function components to implement exactly the same features that a class had before and even more. We will indeep more on them later on their section.
+
+As a result, *we encourage to always pick the function declaration* as it is more clear, flexible, modern and with the power of hooks at your side.
+
+=== State
+
+First things first, let's begin with the definition
+
+[horizontal]
+State:: Is a representation of a system in a given time
+
+The components we create have, directly or indirectly different states depending on the user actions on it, there are many examples:
+
+* Change a form from valid to invalid
+* Show more information based on a click on expansion panel
+* Change page of a list
+* See a spinner rotating while we wait for a loading to finish
+
+All of this are states that change over time based on events (user driven or not) and is extremely important as developers to have clear vision of all this states, which variables are important at each step and what are the conditions to fullfill to move from one state to another.
+
+On react, we can declare the state of a component, along with the declaration of a method to change it https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctlye[correctly]
+
+
+=== JSX
+
+The explanation and reason for JSX can't be better explained than directly on their https://reactjs.org/docs/introducing-jsx.html[documentation page]
+
+Even though, on this guide we would like to go through the most common cases that you might encounter when dealing with this useful Javascript-HTML mix called JSX
+
+==== Loops
+
+To render a https://reactjs.org/docs/lists-and-keys.html[loop] on React you have two equally valid options. First is an inline implementation:
+
+[source, javascript]
+Inline loop
+----
+function NumberList(props) {
+  const numbers = [1,2,3,4];
+
+  return (
+    <ul>
+    {
+      numbers.map((n, i) => 
+        <li key={i}>{n}</li>
+      )
+    }
+    </ul>
+  );
+}
+----
+
+Secondly, implement the loop in a separate method or variable and execute it on the render:
+
+[source, javascript]
+Method loop
+----
+function NumberList(props) {
+  const numbers = [1,2,3,4];
+  const listItems = numbers.map((number, i) =>
+    <li key={i}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+----
+
+==== Conditional
+
+It is a common sitation where you need to show features based on a previosly set condition, for that, on JSX yo can implement these https://reactjs.org/docs/conditional-rendering.html[conditionals] to be applied on runtime based on your state:
+
+[source, javascript]
+Direcly return one thing or another
+----
+function enterHeadquarters(props) {
+  if (props.isValid) {
+    return <Valid />;
+  } else {
+    return <Invalid />;
+  }
+}
+----
+
+Sometimes (almost always) the conditionals apply to some piece of your component, and not the whole result of it, to do that, the strategies are exactly the same as in the loops, inline or on a separate variable/method:
+
+[source, javascript]
+Return one thing or another
+----
+function enterHeadquarters(props) {
+
+  let access;
+  if(props.isValid) {
+    access = <ShowAccess />
+  } else {
+    access = <ForbidAccess />
+  }
+
+  return (
+    <div>
+      Welcome to the security facility based on your credentials:
+      {access}
+    </div>
+  )
+}
+----
+
+Or... just go directly to the JSX inline
+
+[source, javascript]
+Show access or forbid
+----
+function enterHeadquarters(props) {
+  return (
+    <div>
+      Welcome to the security facility based on your credentials:
+      {props.isValid ? <ShowAccess /> : <ForbidAccess />}
+    </div>
+  )
+}
+----
+
+And one last possibility is to show shometing or nothing at all, which can be implemented like this:
+
+[source, javascript]
+Show exit only if inside
+----
+function enterHeadquarters(props) {
+  return (
+    <div>
+      {props.isInside && <ExitHeadquarters />}
+    </div>
+  )
+}
+----
+
+
+=== Props
+
+Components are not isolated form each other, there is and must be plan and final implementation to provide communication between components to maximize the reuse of code and distribute responsabilities.
+
+The solution of how to move information from the source to the final consumer is what is called as *data flow* as is something to take extremely seriously.
+
+In this section we are going to cover only the tools to move data up and down your component tree, later on the guide we will go full on this data flow structure and component organization to take the most out of this flow to have an app that is functional, maintanable and readable.
+
+On react we have just one name: "props" to call two different things. On one hand, variables passed from the father component to the child, and on the other hand, events triggered on the child component that affect the father. With this two possibilities we cover both directions of the flow, variables go down, events go up. That's it.
+
+There is one gold rule, which in React is specially imposed: *"All React components must act like https://en.wikipedia.org/wiki/Pure_function[pure] functions with respect to their props."*
+
+[source, javascript]
+Down flow example
+----
+function Card(props) {
+  return (
+    <div>
+      <img
+        src={props.img}
+        alt={props.titleImg}
+      />
+      <div>
+        {props.title}
+      </div>
+      <div >
+        {props.description}
+      </div>
+    </div>
+  );
+}
+----
+
+All "img", "titleImg", "title", "description" are variables provided by the father, in other words, we have a component responsible of making up something called "Card", and this can re reused every time we want to have a Card, agnostic to the data.
+
+[source, javascript]
+Up flow example
+----
+function Card(props) {
+  return (
+    <div>
+      <img
+        src={props.img}
+        alt={props.titleImg}
+      />
+      <div>
+        {props.title}
+      </div>
+      <div >
+        {props.description}
+      </div>
+      <button onClick={props.select}>Select</button>
+    </div>
+  );
+}
+----
+
+Let's imagine we want to refresh a Card whenever the user is willing to, the Card component does not know nothing about this method or what it does, the component just send to the father that the user triggered this event. Still agnostic and with the capabilities of perform actions on the application without breaking the gold rule. Amazing.
+
+== Hooks
+
+Hooks were introduced to make good use of state and lifecycle events without class components, we encourage to read trough the official documentation as it contains a lot of information https://reactjs.org/docs/hooks-intro.html[on its own section.].
+
+And good to know that you can always develop your custom hooks to empower some functionalities of your application. 
+
+=== useState
+
+Probably the most common and used of all hooks, it allows you to declare a state variable. Simple, easy and useful... https://reactjs.org/docs/hooks-state.html[The useState hook] 
+
+The declaration is as easy as:
+
+[source, javascript]
+UseState hook
+----
+function StateHook() {
+  const [value, setValue] = useState('initial value')
+
+  return (
+    <div>{value}</div>
+  )
+}
+----
+
+We declared here a state variable called "value", with a handler to change the value called "setValue" and finally a initial state, which I set to "initial value", but could have been empty. That's all, ready to use. Next chapter.
+
+=== useEffect
+
+Next in line, enabling to check for effects and manage lyfecicle events, we have https://reactjs.org/docs/hooks-effect.html[the useEffect hook].
+
+[source, javascript]
+UseEffect hook
+----
+function EffectHook() {
+
+  const [value, setValue] = useState('initial value')
+
+  useEffect(() => {
+    console.log("value has changed to: ", value)
+  }, [value])
+
+  return (
+    <div>
+    {value}
+    <button onClick={() => setValue("clicked")}>click!</button>
+    </div>
+  )
+}
+----
+
+On here, there are several things to know about, first, effects execute always when the component mounts and then every time the variables passed on second parameter array changes.
+
+With effect we can perform actions at the start of the component, or after render and with some variable changes
+
+
+== Context
+
+Despite other more complex solutions like Redux, state management with hooks has a drawback, it only applies to the component and not outside of it. Some data of the application are cross-components and are needed en several places, maybe even at the same time. To make some information available everywhere without making a crazy flow of props, React has https://reactjs.org/docs/context.html[Context].

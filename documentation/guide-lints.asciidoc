@@ -1,0 +1,107 @@
+:toc: macro
+
+= Linting
+
+Either if working alone or in a team, the code should always be clear, readable and maintanable, that is why is a must to ensure we have tools watching our back to ensure we write our code following a set of common rules accepted at the beginning and equal to everyone.
+
+This automatic process of checking the quality of the code looking for errors or warnings is called *linting* and on Devon4React we really encourage to use it.
+
+Currently there are several solutions to apply linting on your project, but for us, the most used and all-terrain adequate is https://eslint.org/[ESLint]
+
+== Instalation and usage
+
+Inside your project folder run:
+
+[source, bash]
+----
+$ npm install
+----
+
+Add this script to your package.json (remember we are using typescript):
+
+[source, json]
+----
+"lint": "eslint src --ext .ts,.tsx",
+----
+
+And then, finally:
+
+[source, bash]
+----
+$ npm run lint
+----
+
+The script will automatically run linting on your project and show you the errors and warnings as part of the execution with information of where the issues been and which rule are they breaking, usually even with a solution recommended!
+
+
+== ESLint rules
+
+One running the lint, first thing is to build up the rules the linting will apply when checking our code. It is a crucial step that should be carefully taken and approved for all parts affected.
+
+The first state is usually use the default set of rules for react code then ir our job to check and adapt to our needs, once this has been done it is time to extend with missing rules or with pluggins.
+
+On our case, we usually use prettier to format our code (recommended to share the rules as well) so we wanted to include prettier rules and typescript rules on our linting, so it is not only React but also our pluggins rules that has to been followed by all developers if they want to have a success linting process.
+
+As an example, here is a custom set of rules:
+
+[source, javascript]
+eslintrc.js file
+----
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: { jsx: true }
+  },
+  env: {
+    browser: true,
+    node: true
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    // Prettier plugin and recommended rules
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended'
+  ],
+  rules: {
+    // Include .prettierrc.js rules
+    'prettier/prettier': [
+      'error',
+      { endOfLine: 'auto' },
+      { usePrettierrc: true }
+    ],
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/typedef': [
+      'error',
+      {
+        'call-signature': true,
+        parameter: true,
+        'arrow-parameter': true,
+        'variable-declaration-ignore-function': true,
+        'property-declaration': true,
+        'variable-declaration': true,
+        'member-variable-declaration': true
+      }
+    ],
+    'jsx-a11y/anchor-is-valid': 'off',
+    'no-console': 'warn',
+    'jsx-a11y/no-onchange': 'off'
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  }
+}
+----
+

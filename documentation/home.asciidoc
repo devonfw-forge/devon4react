@@ -1,0 +1,45 @@
+:toc: macro
+
+= Devon4React
+
+Guide to boost web-client development using React technology and its ecosystem.
+
+== Motivation
+
+Openness of React might be a blessing when it comes to chose the best tools, practices and implementations that fit your needs the most, but when starting a new project or when you just started your journey with React it can become a nightmare with an outstanding ease.
+
+On this guide we will provide our best advise, based on the experience gathered when using React on projects for years, making your decision making a process more simple and straight forward.
+
+We will cover React itself, the most essential features, some options to cover them and finally, our recommended set of tools and libraries to install and be ready to rock your projects.
+
+== Guides [Reuse from Devon4ng]
+
+This section introduces concepts to help developes with the tooling and package managers.
+
+* Package Managers
+
+* Package Managers Workflow
+
+* Yarn 2 Support
+
+== React
+
+First of all, we need to understand that React is a library, not a framework as Angular could be, that means it provides little to none external functionalities and they are mainly relying on the community to support some basic features or implement your own, that is the freedom that React provides.
+
+In this section, we are going to split into several sections to cover one by one each of the most common and useful features to add to your project.
+
+* link:guide-react[React]
+* link:guide-frameworks[Frameworks]
+* link:guide-typescript[Typescript]
+* link:guide-lints[Linting]
+* link:guide-styling[Styling]
+* link:guide-file-structure[File structure]
+* link:guide-testing[Testing]
+* link:guide-routing[Routing]
+* link:guide-redux-vs-hooks[Redux vs Hooks]
+* link:guide-http-clients[Http clients]
+* link:guide-i18n[i18n]
+* link:guide-environments[Environment management]
+
+
+== Recomended set of tools

@@ -1,0 +1,42 @@
+:toc: macro
+
+= Frameworks for React
+
+React API provides fast and easy tools to create components, but when you need more than just components all the features are scattered across the community, turning into developers job to seek and cherry pick from a broad number of sources each of them individually.
+
+That is reason behind the rise of frameworks operating behind React to provide an outstanding set of boosters, tooling and integrations to just worry about the code.
+
+Directly on the official documentation of React, they offer us a https://reactjs.org/docs/create-a-new-react-app.html[brief report] of what they recommend and why.
+
+In this chapter we will cover some of the most relevant frameworks to check and assess whether to include or not.
+
+== Create React app
+
+Simplest of them all, https://github.com/facebook/create-react-app[officially supported by React to provide a tool] to create a *single-page React application just by running a npm command*.
+
+It will create a basic React project from scratch just asking for a few questions, and from that moment on is up to the developer to chose and decide how the project will be built.
+
+[source, bash]
+creation script
+----
+npx create-react-app my-app
+cd my-app
+npm start
+----
+
+In comparision to other toolchains or frameworks it does provide less functionalities and tools because *the main purpose is to have an easy, fast and simple tool to create a project and start developing.*
+
+
+== Nextjs
+
+Especially interesting option if you want to go for *hybrid static & server rendering*, https://github.com/vercel/next.js[Nextjs] offers all you need to build your application among many other feature out of the box like routing, typescript integration, fast-refresh...
+
+
+== Gatsby
+
+On the other hand, if your goal is fully static content, following very closely https://github.com/gatsbyjs/gatsby[Gatsby] is there for you in case you find interesting the many tools like speed boosters & cloud integrations.
+
+
+== Nx
+
+A https://github.com/nrwl/nx[suite of dev tools] that, although it covers all the basic needs as run, test and build, the real warhorse is the monorepo approach convenient when building a single workspace to create your set of applications to improve to the max the code sharing and maintanibility.

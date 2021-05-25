@@ -1,0 +1,59 @@
+= Heading level 1
+
+
+*hola*
+
+_asd_
+
+. a
+. a
+.. b
+... c
+. a
+
+[horizontal]
+cpu:: jeje
+
+== hola
+sda
+=== hola2
+asd
+
+NOTE: watch out
+
+
+* FW
+** Create-react-app
+** Nextjs
+** Gatsby
+** Nx
+
+* Language
+** Typescript
+
+* Redux
+** Redux React vs React hooks
+
+* Lint
+** ESLint
+
+* CSS
+** Tailwind
+** Styled components
+** Sass
+
+* Routing
+** React-router-dom
+
+* Http
+** fetch native
+** Axios
+
+* Testing
+** Jest
+** Testing Library
+** Enzyme
+
+* Environments
+** dot-env
+** env-cmd

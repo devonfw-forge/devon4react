@@ -1,0 +1,43 @@
+:toc: macro
+
+= Styling
+
+
+Front-end is not only about coding your component's functionality, is about composing, sizing and displaying them for for a user to make use of them, CSS has taken this role for years and on React is not going to be different.
+
+
+
+=== Basic
+
+React has introduced some changes to both ways of adding styles to an element:
+
+[source, javascript]
+By inline styling
+----
+function Welcome() {
+  return <h1 style={{backgroundColor: "lightblue"}}>Hello Style!</h1>;
+}
+----
+
+For inline, you need to set as a parameter an object with properties corresponding for each CSS element and their value. *We suggest to avoid inline styling as much as possible* and apply proper styling strategies. Inline styling *reduce the style sharing to the mininimum*, forces the developer to go through the code to search for a single style and if it is a common feature, a change inline does not affect any other component, as a result, you *either have an incoherent styling in your app or the manual task to search everywhere this has been applied*.
+
+[source, javascript]
+By class
+----
+function Welcome() {
+  return <h1 className="light-blue-bg">Hello Style!</h1>;
+}
+
+.light-blue-bg {
+  color: lightblue;
+}
+----
+
+You might have noticed that *instead of "class" in that snippet there is "classname"*, that is because React uses JSX and class was already a reserved name.
+
+Create a Use classes is the recommended process to develop your styles and appply them.
+
+=== PostCSS, CSS modules, BEM
+=== Sass
+=== CSS Frameworks
+=== JS in CSS

@@ -1,0 +1,29 @@
+:toc: macro
+
+= Typescript
+
+Javascript is the default language to develop on React, nevertheless there are several options and tools to use https://www.typescriptlang.org/[Typescript] instead.
+
+*Typescript allows the developers to add typing to functions and variable definitions* and that is particularly the reason behind it usage, with that typing a lot of time can be saved in process like debugging, refactor and adapt to new changes.
+
+On devon4React we strongly recommend to go with Typescript as the effort is well worth the value.
+
+== Apply on React
+
+[source, javascript]
+Props with types
+----
+interface GreetingProps {
+  name: string
+  onReturnGreet: (name: string) => void
+}
+
+export function greeting(props: GreetingProps): JSX.Element {
+  return (
+    <span>hello, {props.name}</span>
+    <button onClick={() => props.onReturnGreet("admin")}>return greet to admin</button>
+  )
+}
+----
+
+On here, we defined the interface for the props of the component, leaving *readable information of what and how the data is going to flow through this component*. On one hand we know the components needs a name to greet, which is a string, and on the other hand we clearly know that also, can perform events which in this case is to return the greeting with a variable inside of type string. *If any of this conditions were wrong, we would have an error and the component will not compile* making us certain that *our time investment in defition is now return profits in terms of trust and reliability*.
